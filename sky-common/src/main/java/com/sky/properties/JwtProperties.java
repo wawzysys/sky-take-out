@@ -3,9 +3,10 @@ package com.sky.properties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
+//配置文件属性类
 @Component
 @ConfigurationProperties(prefix = "sky.jwt")
+//在application.yml中配置的sky.jwt相关属性
 @Data
 public class JwtProperties {
 
