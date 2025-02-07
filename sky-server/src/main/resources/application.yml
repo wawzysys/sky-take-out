@@ -13,13 +13,11 @@ spring:
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
 
-mybatis:
-  #mapper配置文件
-  #这样就可以扫描到mapper文件夹下的所有xml文件
-  mapper-locations: classpath:mapper/*.xml
+# 更换mybatis-plus
+mybatis-plus:
   type-aliases-package: com.sky.entity
+  mapper-locations: classpath:mapper/*.xml
   configuration:
-    #开启驼峰命名
     map-underscore-to-camel-case: true
 
 logging:
