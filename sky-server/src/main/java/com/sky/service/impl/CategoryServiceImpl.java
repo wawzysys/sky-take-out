@@ -12,6 +12,8 @@ import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.exception.BaseException;
 import com.sky.mapper.CategoryMapper;
+import com.sky.mapper.DishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.CategoryService;
@@ -28,6 +30,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private DishMapper dishMapper;
+
+    @Autowired
+    private SetmealMapper  setmealMapper;
     /**
      * 添加分类
      *
@@ -92,14 +99,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Result delect(Integer id) {
+    public Result delect(Long id) {
         // 先查询该分类是否存在
         Category category = categoryMapper.selectById(id);
-        
+        if(dishMapper.countByCategoryId(id) > 0 || setmealMapper.countByCategoryId(id) > 0){
+            return Result.info("该分类下有菜品或套餐，不能删除");
+        }
         if (category == null) {
             return Result.error("该分类不存在");
         }
-        
+
         // 如果存在则删除
         categoryMapper.deleteById(id);
         return Result.info("删除成功");

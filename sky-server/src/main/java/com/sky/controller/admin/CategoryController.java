@@ -47,7 +47,7 @@ public class CategoryController {
 
     @PostMapping(value = "status/{status}")
     @ApiOperation(value = "修改分类状态")
-    public void updateStatus(@PathVariable Integer status, Long id) {
+    public void updateStatus(@PathVariable("status") Integer status, Long id) {
         log.info("修改分类状态：{}", status);
         categoryService.updateStatus(status, id);
         // 调用service层方法
@@ -70,7 +70,7 @@ public class CategoryController {
     }
     @DeleteMapping()
     @ApiOperation(value = "delete")
-    public Result delect(Integer id ){
+    public Result delect(Long id ){
         log.info("删除分类{}", id);
         return categoryService.delect(id);
     }

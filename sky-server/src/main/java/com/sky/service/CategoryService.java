@@ -19,7 +19,7 @@ public interface CategoryService {
 
     Result update(CategoryDTO categoryDTO);
 
-    Result delect(Integer id);
+    Result delect(Long id);
 
     Result listByType(Integer type);
 }
